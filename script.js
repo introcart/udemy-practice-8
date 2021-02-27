@@ -24,21 +24,40 @@ function calcAge(birthYear) {
   return age;
 }
 
-const firstName = 'Jonas';
+// const firstName = 'Jonas';
 
 calcAge(1991);
 // console.log(age);
 // printage();
 
 // this keyword difference between regular functions and arrow functions
-
+var firstName = 'Matilda';
 const jonas = {
   firstName: 'Jonas',
   year: 1991,
   calcAge: function () {
     console.log(this);
     console.log(2037 - this.year);
+    const self = this;
+
+    // Solution 1 using an arrow function so this hops up a level and references jonas
+    const isMillenial = () => {
+      console.log(this);
+      console.log(self.year >= 1981 && self.year <= 1996);
+    };
+
+    // Solution 2
+    // const self = this;
+    // const isMillenial = function () {
+    //   console.log(this);
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+    isMillenial();
   },
-  greet: () => console.log(`Hey ${this.firstName}`),
+  greet: () => {
+    console.log(this);
+    console.log(`Hey ${this.firstName}`);
+  },
 };
 jonas.greet();
+jonas.calcAge();
